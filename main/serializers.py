@@ -2,6 +2,28 @@ from rest_framework import serializers
 from . import models
 
 
+class BannerSerializer(serializers.ModelSerializer):
+    title = serializers.SerializerMethodField()
+    image_url = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = models.Banner
+        fields = ['id', 'title', 'image_url']
+        
+    def get_image_url(self,obj):
+        request = self.context.get('request')
+        if obj.image:
+            return request.build_absolute_uri(obj.image.url)
+        return None
+        
+    def get_title(self, obj):
+        return {
+            'uz': obj.title_uz,
+            'ru': obj.title_ru,
+            'en': obj.title_en
+        }
+
+
 class AboutUsSerializer(serializers.ModelSerializer):
     description = serializers.SerializerMethodField()
     image_url = serializers.SerializerMethodField()
@@ -10,18 +32,19 @@ class AboutUsSerializer(serializers.ModelSerializer):
         model = models.AboutUs
         fields = ['id', 'description', 'image_url']
         
-    def get_image_url(self,obj):
-        request = self.context.get('request')
-        if obj.image:
-            return request.build_absolute_uri(obj.image.url)
-        return None
-
     def get_description(self, obj):
         return {
             'uz': obj.description_uz,
             'ru': obj.description_ru,
             'en': obj.description_en
         }
+        
+    def get_image_url(self,obj):
+        request = self.context.get('request')
+        if obj.image:
+            return request.build_absolute_uri(obj.image.url)
+        return None
+
         
         
 class NewsSerializer(serializers.ModelSerializer):
@@ -97,6 +120,7 @@ class SocialMediaSerializer(serializers.ModelSerializer):
     
     
 class MainSerializer(serializers.ModelSerializer):
+    banner = BannerSerializer(many=True, read_only=True)
     aboutus = AboutUsSerializer(many=True, read_only=True)
     news = NewsSerializer(many=True, read_only=True)
     library = LibrarySerializer(many=True, read_only=True)
@@ -105,4 +129,4 @@ class MainSerializer(serializers.ModelSerializer):
         
     class Meta:
         model = models.News
-        fields = ['aboutus', 'news', 'library', 'book', 'socialmedia']
+        fields = ['banner', 'aboutus', 'news', 'library', 'book', 'socialmedia']

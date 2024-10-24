@@ -8,10 +8,11 @@ from .import models
 class MainAPIView(APIView):
     def get(self,request):
         data = {
-            "about_us" : models.AboutUs.objects.all(), 
-            "news" : models.News.objects.all(), 
+            "banner" : models.Banner.objects.all(), 
+            "aboutus" : models.AboutUs.objects.all(), 
             "library" : models.Library.objects.all(), 
             "book" : models.Book.objects.all(), 
+            "news" : models.News.objects.all(), 
             "socialmedia" : models.SocialMedia.objects.all(), 
         }
 

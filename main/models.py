@@ -1,5 +1,15 @@
 from django.db import models
 
+
+class Banner(models.Model):
+    image = models.ImageField(upload_to='Banner/')
+    title = models.CharField(max_length=255)
+    
+    class Meta:
+        verbose_name = "Banner"
+        verbose_name_plural = "Bannerlar"
+    
+
 class AboutUs(models.Model):
     image = models.ImageField(upload_to='AboutUs/')
     description = models.TextField()

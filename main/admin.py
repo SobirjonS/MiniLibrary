@@ -3,6 +3,17 @@ from django.utils.translation import gettext_lazy as _
 from . import models
 
 
+@admin.register(models.Banner)
+class BannerAdmin(admin.ModelAdmin):
+    list_display = ('title_uz', 'title_ru', 'title_en')
+    fieldsets = (
+        (_('Uzbek'), {'fields': ('title_uz',)}),
+        (_('Russian'), {'fields': ('title_ru',)}),
+        (_('English'), {'fields': ('title_en',)}),
+        (_('Image'), {'fields': ('image',)}),
+    )
+
+
 @admin.register(models.AboutUs)
 class AboutUsAdmin(admin.ModelAdmin):
     fieldsets = (
