@@ -99,11 +99,8 @@ LANGUAGES = [
 MODELTRANSLATION_LANGUAGES = ('uz', 'en', 'ru')
 MODELTRANSLATION_REQUIRED_LANGUAGES = ('uz', 'ru', 'en')
 
+CORS_ALLOW_ALL_ORIGINS = True
 
-CORS_ALLOWED_ORIGINS = [
-    "cometat927.pythonanywhere.com",
-    "http://localhost:8000",
-]
 
 
 # Password validation
