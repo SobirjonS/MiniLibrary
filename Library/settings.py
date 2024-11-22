@@ -101,6 +101,9 @@ MODELTRANSLATION_REQUIRED_LANGUAGES = ('uz', 'ru', 'en')
 
 CORS_ALLOW_ALL_ORIGINS = True
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://api.quvaferganalib.uz',
+]
 
 
 # Password validation
